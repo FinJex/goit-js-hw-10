@@ -1,0 +1,7 @@
+import"./assets/modulepreload-polyfill-B5Qt9EMX.js";/* empty css                      */import{f,i as m}from"./assets/vendor-BbSUbo7J.js";const t=document.querySelector("[data-start]"),i=document.querySelector("#datetime-picker");let p;t.disabled=!0;const v={enableTime:!0,time_24hr:!0,defaultDate:new Date,minuteIncrement:1,onClose(e){const s=e[0];if(s<Date.now()){m.error({message:"Please choose a date in the future",position:"topRight"}),t.disabled=!0;return}else p=s,t.disabled=!1}},h=document.querySelector(".timer");let u;f(i,v);t.addEventListener("click",()=>{t.disabled=!0,i.disabled=!0;const e=Date.now();console.log("start"),u=setInterval(()=>{console.log("tick");const c=Date.now()-e;console.log(c);const a=p-Date.now();if(a<=0){clearInterval(u),t.disabled=!1,i.disabled=!1;return}const{days:d,hours:n,minutes:o,seconds:l}=S(a),r=`
+  <div class="field"><span class="value">${String(d).padStart(2,"0")}</span><span class="label">Days</span></div>
+  <div class="field"><span class="value">${String(n).padStart(2,"0")}</span><span class="label">Hours</span></div>
+  <div class="field"><span class="value">${String(o).padStart(2,"0")}</span><span class="label">Minutes</span></div>
+  <div class="field"><span class="value">${String(l).padStart(2,"0")}</span><span class="label">Seconds</span></div>
+`;h.innerHTML=r},1e3)});function S(e){const n=Math.floor(e/864e5),o=Math.floor(e%864e5/36e5),l=Math.floor(e%864e5%36e5/6e4),r=Math.floor(e%864e5%36e5%6e4/1e3);return{days:n,hours:o,minutes:l,seconds:r}}
+//# sourceMappingURL=1-timer.js.map
