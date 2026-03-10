@@ -5,6 +5,12 @@ import "flatpickr/dist/flatpickr.min.css";
 import iziToast from "izitoast";
 // Додатковий імпорт стилів
 import "izitoast/dist/css/iziToast.min.css";
+const daysValue = document.querySelector('[data-days]');
+const hoursValue = document.querySelector('[data-hours]');
+const minutesValue = document.querySelector('[data-minutes]');
+const secondsValue = document.querySelector('[data-seconds]');
+
+
 
 const start = document.querySelector("[data-start]");
 const input = document.querySelector("#datetime-picker");
@@ -20,7 +26,7 @@ const options = {
   onClose(selectedDates) {
     const selectedDate = selectedDates[0];
 
-    if (selectedDate < Date.now()) {
+    if (selectedDate <= Date.now()) {
       iziToast.error({
         message: "Please choose a date in the future",
         position: "topRight",
@@ -54,19 +60,12 @@ console.log(time);
 const diff = userSelectedDate - Date.now();
 if (diff <= 0) {
 clearInterval(intervalID);
-start.disabled = false;
+
 input.disabled = false;
  return; 
 };
-const { days, hours, minutes, seconds } = convertMs(diff);
+addLeadingZero(convertMs(diff));
 
-const str = `
-  <div class="field"><span class="value">${String(days).padStart(2, "0")}</span><span class="label">Days</span></div>
-  <div class="field"><span class="value">${String(hours).padStart(2, "0")}</span><span class="label">Hours</span></div>
-  <div class="field"><span class="value">${String(minutes).padStart(2, "0")}</span><span class="label">Minutes</span></div>
-  <div class="field"><span class="value">${String(seconds).padStart(2, "0")}</span><span class="label">Seconds</span></div>
-`;
-clockface.innerHTML = str;
 
 
 }, 1000);
@@ -93,6 +92,10 @@ function convertMs(ms) {
   return { days, hours, minutes, seconds };
 }
 
-function addLeadingZero(value) {
-    padStart();
+
+function addLeadingZero({ days, hours, minutes, seconds }) {
+daysValue.textContent = String(days).padStart(2, `0`);
+hoursValue.textContent = String(hours).padStart(2, `0`);
+minutesValue.textContent = String(minutes).padStart(2, `0`);
+secondsValue.textContent = String(seconds).padStart(2, `0`);
 }
